@@ -12,9 +12,6 @@ app.use(bodyParser.json());
 // for parsing application/xwww-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', routes);
-
-app.get('/', function (req, res) {});
-
 // convert error to ApiError
 app.use(errorConverter);
 // handle error

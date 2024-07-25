@@ -1,1 +1,1 @@
-https://muci-server-vercel-qh2dsfnp2-plphucs-projects.vercel.app/
+https://muci-server-vercel.vercel.app/

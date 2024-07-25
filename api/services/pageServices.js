@@ -8,9 +8,9 @@ import { db } from '../db.js';
 const getMetaAllPages = async (userId) => {
   try {
     const pages = await Page.find(
-      { owner: userId },
-      { title: 1, icon: 1, level: 1, pageChildren: 1, parent: 1 }
+      { "owner": userId, level: 0 }
     );
+    console.log(userId);
     if (!pages.length) {
       throw new ApiError(httpStatus.NOT_FOUND, 'User has no pages');
     }
@@ -107,7 +107,7 @@ const addPage = async (userId, parentPageId) => {
       return newPage;
     }
 
-    const page = await Page.create({ owner: userId, level: 0 });
+    const page = await Page.create({ owner: userId, level: 0, name: 'Undefined' });
     await session.commitTransaction();
     return page;
   } catch (err) {
@@ -121,7 +121,7 @@ const addPage = async (userId, parentPageId) => {
 const updatePage = async (userId, pageId, contentUpdate) => {
   try {
     const pageToUpdate = await Page.updateOne(
-      { owner: new Types.ObjectId(userId), _id: new Types.ObjectId(pageId) },
+      { owner: userId, _id: new Types.ObjectId(pageId) },
       contentUpdate
     );
     return pageToUpdate;
